@@ -1,9 +1,9 @@
 name: Fetch and Merge Live Sources
 
 on:
-  workflow_dispatch: # 手动触发
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # 每天凌晨 0 点运行
+    - cron: '0 0 * * *'
 
 jobs:
   fetch_merge:
@@ -53,9 +53,11 @@ jobs:
                               if match:
                                   sources.add(match.group())
                   except requests.exceptions.RequestException as e:
-                      print(f'Error fetching {url}: {e}')
+                      print(f'Warning: Error fetching {url}: {e}')
+                      continue # 跳过错误 URL
                   except m3u8.exceptions.ParseError as e:
-                      print(f'Error parse m3u8 {url}: {e}')
+                      print(f'Warning: Error parse m3u8 {url}: {e}')
+                      continue # 跳过错误 URL
           with open('combined.txt', 'w', encoding='utf-8') as f:
               for source in sorted(sources):
                   f.write(source + '\\n')
