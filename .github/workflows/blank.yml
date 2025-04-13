@@ -1,24 +1,65 @@
-name: Merge Live Sources
+name: Fetch and Merge Live Sources
 
 on:
+  push:
   schedule:
-    - cron: '0 0 * * *' # 每天凌晨 0 点运行
+    - cron: '0 0 * * *'
 
 jobs:
-  merge:
+  fetch_merge:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Download source files
-        run: |
-          curl -o source1.txt "URL_OF_SOURCE_1"
-          curl -o source2.txt "URL_OF_SOURCE_2"
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
-      - name: Merge source files
-        run: cat source1.txt source2.txt > combined.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install requests m3u8
+
+      - name: Fetch and merge live sources
+        run: |
+          python -c "
+          import requests
+          import re
+          import m3u8
+          sources = set()
+          with open('source.txt', 'r', encoding='utf-8') as f:
+              for url in f:
+                  url = url.strip()
+                  try:
+                      response = requests.get(url)
+                      response.raise_for_status()
+                      if url.endswith('.m3u8'):
+                        m3u8_master = m3u8.loads(response.text)
+                        for playlist in m3u8_master.playlists:
+                            sources.add(playlist.uri)
+                      elif url.endswith('.m3u') or url.endswith('.txt'):
+                          for line in response.text.splitlines():
+                              line = line.strip()
+                              match = re.search(r'https?://\\S+|rtmp://\\S+', line)
+                              if match:
+                                  sources.add(match.group())
+                      else:
+                          for line in response.text.splitlines():
+                              line = line.strip()
+                              match = re.search(r'https?://\\S+|rtmp://\\S+', line)
+                              if match:
+                                  sources.add(match.group())
+                  except requests.exceptions.RequestException as e:
+                      print(f'Error fetching {url}: {e}')
+                  except m3u8.exceptions.ParseError as e:
+                      print(f'Error parse m3u8 {url}: {e}')
+          with open('combined.txt', 'w', encoding='utf-8') as f:
+              for source in sorted(sources):
+                  f.write(source + '\\n')
+          "
 
       - name: Commit and push changes
         run: |
