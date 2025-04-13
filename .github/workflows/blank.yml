@@ -1,0 +1,29 @@
+name: Merge Live Sources
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天凌晨 0 点运行
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download source files
+        run: |
+          curl -o source1.txt "URL_OF_SOURCE_1"
+          curl -o source2.txt "URL_OF_SOURCE_2"
+
+      - name: Merge source files
+        run: cat source1.txt source2.txt > combined.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "Your Name"
+          git add combined.txt
+          git commit -m "Update combined live sources"
+          git push
