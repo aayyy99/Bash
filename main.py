@@ -1,64 +1,52 @@
 import requests
 import re
 
-def extract_playable_links_and_names(content):
-    """从内容中提取播放链接和频道名称"""
-    results = []
-    # 提取 M3U8 播放链接和频道名称
-    m3u8_matches = re.findall(r'#EXTINF:-1,(.*?)\n(https?://.*?\.m3u8?)', content)
-    for name, link in m3u8_matches:
-        results.append((link, name.strip()))
-    # 提取其他常见播放链接和频道名称 (假设频道名称在链接前一行)
-    other_matches = re.findall(r'(.*?)\n(https?://.*?\.(mp4|flv|ts))', content)
-    for name, link, _ in other_matches:
-        results.append((link, name.strip()))
-    return results
-
-def process_link(link):
-    """处理单个链接，提取播放链接和频道名称"""
+def extract_and_deduplicate_iptv(source_file, results_file):
+    """
+    从 source_file 中的链接提取 IPTV 播放地址和频道名称，去重后写入 results_file。
+    """
     try:
-        response = requests.get(link, timeout=5)
-        response.raise_for_status()
-        content = response.text
+        with open(source_file, 'r', encoding='utf-8') as infile:
+            urls = [line.strip() for line in infile]
 
-        if ".m3u" in link or ".txt" in link:
-            # 递归处理 M3U 和 TXT 文件
-            inner_links = re.findall(r'(https?://.*?(m3u|txt|m3u8|mp4|flv|ts))', content)
-            all_inner_results = []
-            for inner_link in inner_links:
-                all_inner_results.extend(process_link(inner_link[0]))
-            return all_inner_results
+        iptv_data = set()  # 使用集合进行去重
 
-        else:
-            # 处理其他格式
-            return extract_playable_links_and_names(content)
+        for url in urls:
+            try:
+                response = requests.get(url)
+                response.raise_for_status()  # 检查 HTTP 请求是否成功
+                content = response.text
 
-    except requests.exceptions.RequestException as e:
-        print(f"无法获取链接内容: {link}, 错误: {e}")
-        return []
-    except Exception as e:
-        print(f"处理链接内容时发生错误: {link}, 错误: {e}")
-        return []
+                if url.endswith('.m3u'):
+                    # 解析 M3U 文件
+                    for line in content.splitlines():
+                        if line.startswith('#EXTINF:'):
+                            channel_name = re.search(r',(.+)', line).group(1)
+                        elif line.startswith('http'):
+                            iptv_data.add((channel_name, line))
+                elif url.endswith('.txt'):
+                    # 解析 TXT 文件
+                    for line in content.splitlines():
+                        if line.startswith('http'):
+                            iptv_data.add(("", line))
 
-def main():
-    try:
-        with open('source.txt', 'r', encoding='utf-8') as f:
-            links = [line.strip() for line in f if line.strip()]
+            except requests.exceptions.RequestException as e:
+                print(f"下载 {url} 时出错：{e}")
+            except Exception as e:
+                print(f"处理 {url} 时发生错误：{e}")
+
+        with open(results_file, 'w', encoding='utf-8') as outfile:
+            for channel_name, url in iptv_data:
+                outfile.write(f"{channel_name},{url}\n")
+
+        print(f"IPTV 播放地址和频道名称已提取并去重，结果保存在 {results_file} 中。")
+
     except FileNotFoundError:
-        print("错误：找不到 source.txt 文件。")
-        return
+        print(f"错误：文件 {source_file} 未找到。")
+    except Exception as e:
+        print(f"发生错误：{e}")
 
-    all_results = []
-    for link in links:
-        results = process_link(link)
-        if results:
-            all_results.extend(results)
-
-    unique_results = list(set(all_results)) # 去重
-
-    with open('results.txt', 'w', encoding='utf-8') as f:
-        for link, name in unique_results:
-            f.write(f"频道名称: {name}, 播放链接: {link}\n")
-
-if __name__ == "__main__":
-    main()
+# 调用函数进行处理
+source_file = 'source.txt'
+results_file = 'results.txt'
+extract_and_deduplicate_iptv(source_file, results_file)
