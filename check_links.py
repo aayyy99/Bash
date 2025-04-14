@@ -16,6 +16,9 @@ def process_link(link):
     except requests.exceptions.RequestException as e:
         print(f"无法获取链接内容: {link}, 错误: {e}")
         return []
+    except Exception as e:
+        print(f"处理链接内容时发生错误: {link}, 错误: {e}")
+        return []
 
 def main():
     try:
