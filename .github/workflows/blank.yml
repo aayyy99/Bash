@@ -5,15 +5,18 @@ on:
   schedule:
     - cron: '0 0 * * *' # 每天凌晨 0 点运行
 
+permissions:
+  contents: write # 授予写入仓库内容的权限
+
 jobs:
   check_links:
     runs-on: ubuntu-latest
 
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4 # 更新到 v4
+        uses: actions/checkout@v4
       - name: 安装 Python
-        uses: actions/setup-python@v4 #更新到v4
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
@@ -24,7 +27,7 @@ jobs:
         run: python check_links.py
 
       - name: 上传结果
-        uses: actions/upload-artifact@v4 # 更新到 v4
+        uses: actions/upload-artifact@v4
         with:
           name: results
           path: results.csv
