@@ -17,7 +17,7 @@ def extract_and_deduplicate_iptv(source_file, results_file):
         with open(source_file_path, 'r', encoding='utf-8') as infile:
             urls = [line.strip() for line in infile]
 
-        iptv_data = set()  # 使用集合进行去重
+        iptv_data = []  # 使用列表存储所有条目
 
         for url in urls:
             try:
@@ -36,21 +36,27 @@ def extract_and_deduplicate_iptv(source_file, results_file):
                             else:
                                 channel_name = "未知频道"
                         elif line.startswith('http'):
-                            iptv_data.add((channel_name, line))
+                            iptv_data.append((channel_name, line))
                 elif url.endswith('.txt'):
                     # 解析 TXT 文件
                     for line in content.splitlines():
                         if line.startswith('http'):
-                            iptv_data.add(("", line))
+                            iptv_data.append(("", line))
 
             except requests.exceptions.RequestException as e:
                 logging.error(f"下载 {url} 时出错：{e}")
             except Exception as e:
                 logging.error(f"处理 {url} 时发生错误：{e}")
 
+        unique_data = []  # 存储去重后的条目
+        seen = set()  # 存储已见条目的元组
+
         with open(results_file_path, 'w', encoding='utf-8') as outfile:
             for channel_name, url in iptv_data:
-                outfile.write(f"{channel_name},{url}\n")
+                if (channel_name, url) not in seen:
+                    unique_data.append((channel_name, url))
+                    seen.add((channel_name, url))
+                    outfile.write(f"{channel_name},{url}\n")
 
         print(f"IPTV 播放地址和频道名称已提取并去重，结果保存在 {results_file} 中。")
 
