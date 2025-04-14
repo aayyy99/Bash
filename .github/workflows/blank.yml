@@ -30,10 +30,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: results
-          path: results.csv
+          path: results.txt
 
       - name: 提交更改（如果存在）
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "更新直播源数据"
-          file_pattern: results.csv
+          file_pattern: results.txt
