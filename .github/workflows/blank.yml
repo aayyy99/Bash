@@ -15,12 +15,6 @@ jobs:
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
-
-      - name: 设置 Git 配置
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
       - name: 安装 Python
         uses: actions/setup-python@v4
         with:
@@ -32,11 +26,14 @@ jobs:
       - name: 运行检查脚本
         run: python main.py
 
+      - name: 上传结果
+        uses: actions/upload-artifact@v4
+        with:
+          name: results
+          path: results.txt #修改了文件名
+
       - name: 提交更改（如果存在）
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "更新播放链接数据"
-          file_pattern: results.txt
-
-      - name: 强制推送更改
-        run: git push origin main --force
+          file_pattern: results.txt #修改了文件名
