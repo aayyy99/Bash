@@ -4,19 +4,33 @@ import re
 def check_link(link):
     try:
         response = requests.get(link, timeout=5)
-        response.raise_for_status()  # 检查 HTTP 错误
+        response.raise_for_status()
         return True, response.text
     except requests.exceptions.RequestException as e:
         return False, str(e)
 
-def extract_channel_name(link):
+def extract_channel_name(link, data):
     try:
-      #此正则表达式会匹配常见的直播源格式中的频道名称。
-      match = re.search(r'#(EXTINF:-1,)?(.*)', link)
-      if match:
-          return match.group(2).strip()
+        if ".m3u" in link:
+            match = re.findall(r'#EXTINF:-1,(.*?)\n', data)
+            if match:
+                return ", ".join(match)
+        elif ".txt" in link:
+            # 尝试从 TXT 文件中提取频道名称
+            lines = data.splitlines()
+            if lines:
+                # 假设每行一个直播源链接，尝试从链接中提取
+                match = re.search(r'#(EXTINF:-1,)?(.*)', lines[0])
+                if match:
+                    return match.group(2).strip()
+                else:
+                    return "Txt文件,未知频道"
+        else:
+            match = re.search(r'#(EXTINF:-1,)?(.*)', link)
+            if match:
+                return match.group(2).strip()
     except Exception as e:
-      print(f"提取频道名称时发生错误: {e}")
+        print(f"提取频道名称时发生错误: {e}")
     return "未知频道"
 
 def main():
@@ -30,10 +44,10 @@ def main():
     results = []
     for link in links:
         success, data = check_link(link)
-        channel_name = extract_channel_name(link)
+        channel_name = extract_channel_name(link, data)
         results.append(f"链接: {link}, 频道名称: {channel_name}, 状态: {'成功' if success else '失败'}")
 
-    with open('results.txt', 'w', encoding='utf-8') as f: #修改了文件名和写入方式。
+    with open('results.txt', 'w', encoding='utf-8') as f:
         for result in results:
             f.write(result + '\n')
 
