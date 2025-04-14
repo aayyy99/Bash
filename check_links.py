@@ -12,7 +12,23 @@ def process_link(link):
     try:
         response = requests.get(link, timeout=5)
         response.raise_for_status()
-        return extract_playable_links_from_content(response.text)
+        content = response.text
+
+        if ".m3u" in link or ".txt" in link:
+            # 递归处理 M3U 和 TXT 文件
+            inner_links = re.findall(r'(https?://.*?(m3u|txt|m3u8|mp4|flv|ts))', content)
+            all_inner_links = []
+            for inner_link in inner_links:
+                all_inner_links.append(inner_link[0])
+            inner_playable_links = []
+            for inner_link in all_inner_links:
+                inner_playable_links.extend(process_link(inner_link))
+            return inner_playable_links
+
+        else:
+            # 处理其他格式
+            return extract_playable_links_from_content(content)
+
     except requests.exceptions.RequestException as e:
         print(f"无法获取链接内容: {link}, 错误: {e}")
         return []
@@ -34,7 +50,7 @@ def main():
         if playable_links:
             all_playable_links.extend(playable_links)
 
-    with open('playable_links.txt', 'w', encoding='utf-8') as f:
+    with open('results.txt', 'w', encoding='utf-8') as f: #修改了文件名
         for playable_link in all_playable_links:
             f.write(playable_link + '\n')
 
