@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
+
       - name: 安装 Python
         uses: actions/setup-python@v4
         with:
@@ -37,3 +38,6 @@ jobs:
         with:
           commit_message: "更新播放链接数据"
           file_pattern: results.txt #修改了文件名
+
+      - name: 强制推送更改
+        run: git push origin main --force
