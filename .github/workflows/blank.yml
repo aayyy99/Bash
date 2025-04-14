@@ -32,14 +32,14 @@ jobs:
       - name: 运行检查脚本
         run: python main.py
 
-      - name: 拉取远程更改
-        run: git pull origin main --rebase # 使用 rebase 避免合并提交
+      - name: 拉取远程更改 (rebase)
+        run: git pull origin main --rebase
 
       - name: 提交更改（如果存在）
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "更新播放链接数据"
-          file_pattern: results.txt #修改了文件名
+          file_pattern: results.txt
 
       - name: 推送更改
         run: git push origin main
