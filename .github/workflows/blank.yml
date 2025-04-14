@@ -24,45 +24,7 @@ jobs:
         run: pip install requests
 
       - name: 运行检查脚本
-        run: python name: 检查直播源链接
-
-on:
-  workflow_dispatch: # 允许手动运行
-  schedule:
-    - cron: '0 0 * * *' # 每天凌晨 0 点运行
-
-permissions:
-  contents: write # 授予写入仓库内容的权限
-
-jobs:
-  check_links:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
-      - name: 安装 Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: 安装依赖
-        run: pip install requests
-
-      - name: 运行检查脚本
-        run: python check_links.py
-
-      - name: 上传结果
-        uses: actions/upload-artifact@v4
-        with:
-          name: results
-          path: results.txt #修改了文件名
-
-      - name: 提交更改（如果存在）
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "更新播放链接数据"
-          file_pattern: results.txt #修改了文件名
+        run: python main.py
 
       - name: 上传结果
         uses: actions/upload-artifact@v4
