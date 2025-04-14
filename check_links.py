@@ -22,10 +22,10 @@ def extract_channel_name(link):
 
 def main():
     try:
-        with open('links.txt', 'r', encoding='utf-8') as f:
+        with open('source.txt', 'r', encoding='utf-8') as f: #修改了文件名
             links = [line.strip() for line in f if line.strip()]
     except FileNotFoundError:
-        print("错误：找不到 links.txt 文件。")
+        print("错误：找不到 source.txt 文件。") #修改了文件名
         return
 
     results = []
