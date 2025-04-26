@@ -10,7 +10,7 @@ logging.basicConfig(filename='extract_iptv_errors.log', level=logging.ERROR,
 def extract_and_deduplicate_iptv(source_file, results_file):
     """
     从 source_file 中的链接提取 IPTV 播放地址和频道名称，去重后写入 results_file。
-    改进了频道名称提取，增加了对 M3U 文件头的处理，并提供了基于播放地址的去重选项。
+    进一步优化频道名称提取，优先处理 tvg-name 属性。
     """
     try:
         source_file_path = os.path.join(os.path.dirname(__file__), source_file)
@@ -32,16 +32,21 @@ def extract_and_deduplicate_iptv(source_file, results_file):
 
                 if source_url.endswith('.m3u'):
                     # 解析 M3U 文件
+                    current_channel_name = ""
                     for line in content.splitlines():
                         if line.startswith('#EXTM3U'):
                             continue  # 跳过 M3U 文件头
                         elif line.startswith('#EXTINF:'):
-                            # 更鲁棒的正则表达式，允许频道名称中包含括号等字符
-                            match = re.search(r',([\s\S]*)$', line)
-                            channel_name = match.group(1).strip() if match else "未知频道"
+                            channel_name_match = re.search(r'tvg-name="([^"]*)"', line)
+                            if channel_name_match:
+                                current_channel_name = channel_name_match.group(1).strip()
+                            else:
+                                # 如果没有 tvg-name，则尝试从逗号后提取
+                                name_match = re.search(r',([\s\S]*?)(?:\s*\(|\s*$)', line)
+                                current_channel_name = name_match.group(1).strip() if name_match else "未知频道"
                         elif line.startswith('http'):
-                            iptv_data.append((channel_name, line.strip()))
-                            channel_name = "" # 重置频道名称
+                            iptv_data.append((current_channel_name, line.strip()))
+                            current_channel_name = "" # 重置频道名称
                 elif source_url.endswith('.txt'):
                     # 解析 TXT 文件
                     for line in content.splitlines():
@@ -58,7 +63,7 @@ def extract_and_deduplicate_iptv(source_file, results_file):
         for channel, url in iptv_data:
             if url not in unique_iptv_data:
                 unique_iptv_data[url] = channel
-            elif not unique_iptv_data[url]:
+            elif not unique_iptv_data[url] and channel:
                 unique_iptv_data[url] = channel # 如果之前没有频道名称，则记录
 
         with open(results_file_path, 'w', encoding='utf-8') as outfile:
