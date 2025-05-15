@@ -24,7 +24,6 @@ def clean_channel_name(channel_name):
     """
     清理频道名称中的乱码，移除特殊符号和控制字符，保留中英文、数字和常见符号。
     """
-    # 移除不可见字符和一些特殊符号，但保留中文、英文、数字和空格
     cleaned_name = re.sub(r'[^\u4e00-\u9fa5a-zA-Z0-9\s\-\_]', '', channel_name)
     return cleaned_name.strip()
 
@@ -72,6 +71,7 @@ def extract_and_deduplicate_iptv(source_file, results_file):
                             else:
                                 name_match = re.search(r',([\s\S]*?)(?:\s*\(|\s*$)', line)
                                 current_channel_name = name_match.group(1).strip() if name_match else "未知频道"
+                            current_channel_name = clean_channel_name(current_channel_name) # 清理频道名称
                         elif line.startswith('http'):
                             iptv_data.append((current_channel_name, line.strip()))
                             process_logger.info(f"提取到频道：{current_channel_name}, 地址：{line.strip()}")
@@ -97,13 +97,12 @@ def extract_and_deduplicate_iptv(source_file, results_file):
         process_logger.info("开始去重处理...")
         print("开始去重处理...")
         for channel, url in iptv_data:
-            cleaned_channel = clean_channel_name(channel)
             if url not in unique_iptv_data:
-                unique_iptv_data[url] = cleaned_channel
-                process_logger.info(f"新增唯一地址：{url}, 频道：{cleaned_channel}")
-            elif not unique_iptv_data[url] and cleaned_channel:
-                unique_iptv_data[url] = cleaned_channel
-                process_logger.info(f"更新地址 {url} 的频道名称为：{cleaned_channel}")
+                unique_iptv_data[url] = channel
+                process_logger.info(f"新增唯一地址：{url}, 频道：{channel}")
+            elif not unique_iptv_data[url] and channel:
+                unique_iptv_data[url] = channel
+                process_logger.info(f"更新地址 {url} 的频道名称为：{channel}")
 
         process_logger.info(f"去重处理完成，共保留 {len(unique_iptv_data)} 条记录。")
         print(f"去重处理完成，共保留 {len(unique_iptv_data)} 条记录。")
