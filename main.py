@@ -22,9 +22,19 @@ process_logger.addHandler(fh)
 
 def clean_channel_name(channel_name):
     """
-    清理频道名称中的乱码，移除特殊符号和控制字符，保留中英文、数字和常见符号。
+    清理频道名称中的乱码，保留中英文、数字、空格、连字符、下划线和 # 符号。
+    尝试将一些常见错误编码的字符串转换为 UTF-8。
     """
-    cleaned_name = re.sub(r'[^\u4e00-\u9fa5a-zA-Z0-9\s\-\_]', '', channel_name)
+    cleaned_name = re.sub(r'[^\u4e00-\u9fa5a-zA-Z0-9\s\-\_#]', '', channel_name)
+
+    # 尝试将 Latin-1 编码的字符串解码为 UTF-8
+    try:
+        cleaned_name = cleaned_name.encode('latin-1').decode('utf-8')
+    except UnicodeEncodeError:
+        pass
+    except UnicodeDecodeError:
+        pass
+
     return cleaned_name.strip()
 
 def extract_and_deduplicate_iptv(source_file, results_file):
