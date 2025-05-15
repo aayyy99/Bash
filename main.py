@@ -22,10 +22,10 @@ process_logger.addHandler(fh)
 
 def clean_channel_name(channel_name):
     """
-    清理频道名称中的乱码，这里可以根据实际情况添加更复杂的清理逻辑。
-    目前仅移除部分特殊字符。
+    清理频道名称中的乱码，移除特殊符号和控制字符，保留中英文、数字和常见符号。
     """
-    cleaned_name = re.sub(r'[^\u4e00-\u9fa5a-zA-Z0-9\s]', '', channel_name)
+    # 移除不可见字符和一些特殊符号，但保留中文、英文、数字和空格
+    cleaned_name = re.sub(r'[^\u4e00-\u9fa5a-zA-Z0-9\s\-\_]', '', channel_name)
     return cleaned_name.strip()
 
 def extract_and_deduplicate_iptv(source_file, results_file):
