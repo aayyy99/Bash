@@ -2688,7 +2688,6 @@ ELEVEN体育3,https://smart.pendy.dpdns.org/Smart.php?id=eltasport3_twn
 咪咕直播,http://111.22.153.159:35455/itv/3000000001000010129.m3u8?cdn=FifastbLive
 咪咕直播,http://111.22.153.159:35455/itv/3000000001000010948.m3u8?cdn=FifastbLive
 卡酷少儿,http://112.46.105.20:8009/hls/69/index.m3u8
-卡酷少儿,https://hsplay-360.v.btime.com/live_btime/btv_sn_20170706_s10/index.m3u8?time=1747569614&sign=5ab56420b553da6ad10853f9c6c08d2e
 金鹰卡通,http://112.46.105.20:8009/hls/67/index.m3u8
 优漫卡通,http://58.221.214.82:9901/tsfile/live/0008_2.m3u8
 哈哈炫动,http://60.29.124.66:6080/hls/62/index.m3u8
@@ -2872,11 +2871,16 @@ ELEVEN体育3,https://smart.pendy.dpdns.org/Smart.php?id=eltasport3_twn
 辽宁生活,http://dassby.qqff.top:99/live/辽宁生活/index.m3u8
 辽宁经济,http://dassby.qqff.top:99/live/辽宁经济/index.m3u8
 辽宁都市,http://dassby.qqff.top:99/live/辽宁都市/index.m3u8
-广东卫视,http://218.13.14.6:60050/tsfile/live/1017_1.m3u8
-广东珠江,http://218.13.14.6:60050/tsfile/live/1018_1.m3u8
-广东新闻,http://218.13.14.6:60050/tsfile/live/1019_1.m3u8
+广东珠江,http://119.32.12.17:2901/udp/224.1.100.23:11111
+大湾区卫视,http://222.128.55.152:9080/live/dwq.m3u8
+广东新闻,http://119.32.12.17:2901/udp/224.1.100.5:11111
 广东公共,http://218.13.14.6:60050/tsfile/live/1020_1.m3u8
-广东体育,http://218.13.14.6:60050/tsfile/live/1021_1.m3u8
+广东体育,http://119.32.12.17:2901/udp/224.1.100.34:11111
+广东影视,http://119.32.12.17:2901/udp/224.1.100.11:11111
+广东少儿,http://119.32.12.17:2901/udp/224.1.100.9:11111
+广东民生,http://119.32.12.17:2901/udp/224.1.100.4:11111
+广东经济科教,http://119.32.12.17:2901/udp/224.1.100.6:11111
+广州竞赛,http://119.32.12.17:2901/udp/224.1.100.105:11111
 武术世界,http://www.lizhinas.top:1009/rtp/239.252.220.180:5140
 文物宝库,http://www.lizhinas.top:1009/rtp/239.252.220.158:5140
 梨园频道,http://www.lizhinas.top:1009/rtp/239.252.220.179:5140
@@ -3534,12 +3538,12 @@ CCTV-6 电影,http://[2409:8087:1a01:df::4077]:80/ottrrs.hl.chinamobile.com/PLTV
 CCTV-7 国防军事,http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225733/index.m3u8
 CCTV-8 电视剧,http://[2409:8087:1a01:df::4077]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226008/index.m3u8
 CCTV-9 纪录,http://[2409:8087:1a01:df::4077]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225734/index.m3u8
+CCTV-10 科教,http://[2409:8087:1a01:df::4077]:80/PLTV/88888888/224/3221225677/index.m3u8
 CCTV-11 戏曲,http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226565/index.m3u8
 CCTV-12 社会与法,http://[2409:8087:1a01:df::4077]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225731/index.m3u8
 CCTV-13 新闻,http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226537/index.m3u8
 CCTV-14 少儿,http://[2409:8087:1a01:df::4077]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225732/index.m3u8
 CCTV-15 音乐,http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226476/index.m3u8
-CCTV-16 奥林匹克,http://[2409:8087:1a01:df::4077]:80/PLTV/88888888/224/3221225893/index.m3u8
 CCTV-17 农业农村,http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225765/index.m3u8
 凤凰中文,http://play-flive.ifeng.com/live/06OLEGEGM4G.m3u8
 凤凰资讯,http://play-flive.ifeng.com/live/06OLEEWQKN4.m3u8
