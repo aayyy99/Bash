@@ -2467,7 +2467,6 @@ CETV4,http://www.lizhinas.top:1009/rtp/239.252.219.169:5140
 西藏卫视,http://112.46.105.20:8009/hls/59/index.m3u8
 内蒙古卫视,http://112.46.105.20:8009/hls/60/index.m3u8
 三沙卫视,http://lt.hxtre.com:8880/bptv/10000100000000050000000003887452.m3u8
-兵团卫视,http://lt.hxtre.com:8880/bptv/10000100000000050000000003887456.m3u8
 厦门卫视,http://lt.hxtre.com:8880/bptv/10000100000000050000000003887454.m3u8
 延边卫视,http://111.22.153.159:35455/itv/1000000005000266008.m3u8?cdn=ystenlive
 安多卫视,http://111.22.153.159:35455/itv/1000000005000266001.m3u8?cdn=ystenlive
@@ -2580,7 +2579,7 @@ CHC动作电影,http://sport.pendy.dpdns.org/migu/644368714?token=BCDxUPC2aE0y0i
 动物星球,http://live4play.uk/livehttpplay?channel_id=20106
 1905电影网,http://150.138.77.132:10037/1905电影网.php?id=1905a
 豆瓣电影,https://live.tvfix.org/live/cmc/index.m3u8
-美亚电影,https://live.tvfix.org/live/mydy/1/v4000000/index.m3u8
+美亚电影,https://live.tvfix.org/live/mydy/index.m3u8
 漫威电影,http://1.94.31.214:35455/douyu/6140589
 精彩影视,http://111.22.153.159:35455/itv/6000000006000320630.m3u8?cdn=wasusyt
 中国天气,http://111.22.153.159:35455/itv/5000000005000031974.m3u8?cdn=bestzb
@@ -2621,10 +2620,13 @@ CHC动作电影,http://sport.pendy.dpdns.org/migu/644368714?token=BCDxUPC2aE0y0i
 澳视澳门,http://103.233.191.134:1935/ch1/ch1.live/playlist.m3u8
 莲花卫视,http://8.138.7.223/tv/lotustv.m3u8
 翡翠台,http://ali.hlspull.yximgs.com/live/qwt_feicui.flv
+星空卫视,http://119.32.12.32:2901/udp/224.1.100.13:11111
+环球电视,http://utv1.hqtvzb.com:9999/hls/world.m3u8
 耀才财经,https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
 台视新闻,http://38.64.72.148/hls/modn/list/4013/chunklist1.m3u8
 中天新闻,http://ali.hlspull.yximgs.com/live/qwt_zhongtianxinwen.flv
 中天新闻,https://smart.pendy.dpdns.org/Smart.php?id=ctinews
+中天娱乐,http://61.221.215.25:8800/hls/47/index.m3u8
 华视新闻,http://litv.zapi.us.kg/?id=4gtv-4gtv052
 三立新闻,http://live4play.uk/livehttpplay?channel_id=10126
 三立综合,http://live4play.uk/livehttpplay?channel_id=12038
@@ -2636,7 +2638,6 @@ CHC动作电影,http://sport.pendy.dpdns.org/migu/644368714?token=BCDxUPC2aE0y0i
 东森综合,http://live4play.uk/livehttpplay?channel_id=20077
 东森洋片,http://live4play.uk/livehttpplay?channel_id=20080
 东森戏剧,http://live4play.uk/livehttpplay?channel_id=20072
-美亚电影,http://live4play.uk/livehttpplay?channel_id=20197
 民视新闻台,http://live4play.uk/livehttpplay?channel_id=20097
 民视台湾台,https://smart.pendy.dpdns.org/Smart.php?id=ftvtaiwan_twn
 民视第一台,https://smart.pendy.dpdns.org/Smart.php?id=lunghuajingdian_twn
@@ -2649,12 +2650,8 @@ AMC电影,http://122.117.71.103:8559/http/61.222.53.250:8092/upload/115/AMC_TS-1
 龙华日韩,https://cdn8.163189.xyz/live/lhrh/stream.m3u8
 龙华戏剧,https://cdn8.163189.xyz/live/lhxj/stream.m3u8
 靖天电影,http://live4play.uk/livehttpplay?channel_id=12037
-港台电视31,https://smart.pendy.dpdns.org/Smart.php?id=rhk31_twn
-港台电视32,https://smart.pendy.dpdns.org/Smart.php?id=rhk32_twn
-DAZN体育1,http://live4play.uk/livehttpplay?channel_id=10104
-DAZN体育2,http://live4play.uk/livehttpplay?channel_id=10105
-ELEVEN体育1,https://smart.pendy.dpdns.org/Smart.php?id=eltasport_twn
-ELEVEN体育2,http://108.181.20.197/livehttpplay?channel_id=20107
+ELEVEN体育1,https://smart.pendy.dpdns.org/Smart.php?id=eltasport1_twn
+ELEVEN体育2,https://smart.pendy.dpdns.org/Smart.php?id=eltasport2_twn
 ELEVEN体育3,https://smart.pendy.dpdns.org/Smart.php?id=eltasport3_twn
 爱喜剧,http://111.22.153.159:35455/itv/2000000004000000032.m3u8?cdn=hnbblive
 爱科幻,http://111.22.153.159:35455/itv/2000000004000000033.m3u8?cdn=hnbblive
