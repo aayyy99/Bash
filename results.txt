@@ -2,7 +2,6 @@ ABN China,https://mediaserver.abnvideos.com/streams/abnchina.m3u8
 Ando TV,http://119.1.122.186:4022/rtp/238.255.2.189:5999
 Angel TV Chinese,https://cdn3.wowza.com/5/TDJ0aWNkNXFxWWta/angeltvcloud/ngrp:angelchinese_all/playlist.m3u8
 Animation Show Channel,http://180.213.174.225:9901/tsfile/live/1034_1.m3u8?authid=0&key=txiptv&playlive=1
-BBC News Asia Pacific,https://cdn4.skygo.mn/live/disk1/BBC_News/HLSv3-FTA/BBC_News.m3u8
 Bingtuan Satellite TV,http://49.113.179.174:4022/udp/238.125.4.13:5140
 Bloomberg TV Asia,https://bloomberg.com/media-manifest/streams/asia.m3u8
 Bloomberg TV Asia Live Event,https://bloomberg.com/media-manifest/streams/asia-event.m3u8
@@ -2540,7 +2539,7 @@ CHC动作电影,http://cs.5gtv.hbcatv.cn:9093/live/OP001/IP-DZDY-HD/index.m3u8
 华数4K,http://111.22.153.159:35455/itv/2000000004000000014.m3u8?cdn=hnbblive
 纯享4K,http://111.22.153.159:35455/itv/1000000004000011651.m3u8?cdn=ystenlive
 求索纪录,http://tvbox6.icu/tv/gdmzyd.php?id=104
-动物星球,http://live4play.uk/livehttpplay?channel_id=20106
+搜狐剧场,https://hdl-vip-ws.qf.56.com/live/lc_11730.flv
 1905电影网,http://150.138.77.132:10037/1905电影网.php?id=1905a
 豆瓣电影,https://live.tvfix.org/live/cmc/index.m3u8
 美亚电影,https://live.tvfix.org/live/mydy/index.m3u8
@@ -2576,9 +2575,7 @@ CHC动作电影,http://cs.5gtv.hbcatv.cn:9093/live/OP001/IP-DZDY-HD/index.m3u8
 凤凰中文,http://203.205.191.53/qctv.fengshows.cn/live/0701pcc72.m3u8
 凤凰资讯,http://203.205.191.53/qctv.fengshows.cn/live/0701pin72.m3u8
 凤凰香港,http://203.205.191.53/qctv.fengshows.cn/live/0701phk72.m3u8
-凤凰中文,http://ali.hlspull.yximgs.com/live/qwt_fhzw.flv
 凤凰资讯,http://php.jdshipin.com/TVOD/iptv.php?id=fhzx
-凤凰中文,http://cs.5gtv.hbcatv.cn:9093/live/OP001/IP-FHZW-HD/index.m3u8
 澳视澳门,http://119.32.12.17:2901/udp/224.1.100.12:11111
 澳视澳门,http://103.233.191.134:1935/ch1/ch1.live/playlist.m3u8
 莲花卫视,http://8.138.7.223/tv/lotustv.m3u8
@@ -2588,8 +2585,7 @@ CHC动作电影,http://cs.5gtv.hbcatv.cn:9093/live/OP001/IP-DZDY-HD/index.m3u8
 环球电视,http://utv1.hqtvzb.com:9999/hls/world.m3u8
 耀才财经,https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8
 台视新闻,http://38.64.72.148/hls/modn/list/4013/chunklist1.m3u8
-中天新闻,http://ali.hlspull.yximgs.com/live/qwt_zhongtianxinwen.flv
-中天新闻,https://smart.pendy.dpdns.org/Smart.php?id=ctinews
+中天新闻,https://ali.hlspull.yximgs.com/live/ztxw001.flv
 中天娱乐,http://61.221.215.25:8800/hls/47/index.m3u8
 华视新闻,http://litv.zapi.us.kg/?id=4gtv-4gtv052
 三立新闻,http://live4play.uk/livehttpplay?channel_id=10126
