@@ -1647,16 +1647,11 @@ CHC动作电影,http://8.138.7.223/tv/hot.php?id=66
 凤凰中文,http://203.205.191.53/qctv.fengshows.cn/live/0701pcc72.m3u8
 凤凰资讯,http://203.205.191.53/qctv.fengshows.cn/live/0701pin72.m3u8
 凤凰香港,http://203.205.191.53/qctv.fengshows.cn/live/0701phk72.m3u8
-凤凰中文,https://cdn.163189.xyz/live/fhzw/stream.m3u8
-凤凰资讯,https://cdn6.163189.xyz/live/fhzx/stream.m3u8
-凤凰香港,https://cdn6.163189.xyz/live/fhhk/stream.m3u8
 凤凰中文,http://qwt.zhibotv.top:2016/全网通.php?id=凤凰中文台
 凤凰资讯,http://qwt.zhibotv.top:2016/全网通.php?id=凤凰资讯台
 凤凰香港,http://qwt.zhibotv.top:2016/全网通.php?id=凤凰香港台
-重温经典,http://cdn3.163189.xyz/live/cwjd/stream.m3u8
-澳视澳门,http://cdn.163189.xyz/live/asam/stream.m3u8
 澳视澳门,http://103.233.191.134:1935/ch1/ch1.live/playlist.m3u8
-澳亚卫视,http://cdn.163189.xyz/live/as/stream.m3u8
+澳亚卫视,http://cdn9.163189.xyz/live/as/stream.m3u8
 莲花卫视,http://8.138.7.223/tv/lotustv.m3u8
 莲花卫视,http://live-hls.macaulotustv.com/lotustv/macaulotustv.m3u8
 无线新闻,http://cdn9.163189.xyz/smt1.1.php?id=inews_twn
