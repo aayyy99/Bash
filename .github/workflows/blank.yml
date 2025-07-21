@@ -4,7 +4,6 @@ on:
   workflow_dispatch: # 允许手动运行
   schedule:
     - cron: '30 22 * * *'   # 北京时间每天早上 6:30 运行 (UTC+8)
-    - cron: '30 7 * * *'    # 北京时间每天下午 15:30 运行 (UTC+8)
 
 permissions:
   contents: write # 授予写入仓库内容的权限
