@@ -82,6 +82,7 @@ Shaanxi Agroforestry Satellite TV,http://49.113.179.174:4022/udp/238.125.4.154:5
 Shandong Education TV,http://49.113.179.174:4022/udp/238.125.0.156:5140
 Shanghai Education Television Station,http://223.166.234.114:7777/tsfile/live/1033_1.m3u8
 Sihai Fishing Channel,http://49.113.179.174:4022/udp/238.125.2.172:5140
+Siping TV,http://stream2.jlntv.cn/sptv/sd/live.m3u8?_upt=f27750421743154598
 SMG Football Channel,http://49.113.179.174:4022/udp/238.125.2.142:5140
 STV City,http://61.173.144.157:9901/tsfile/live/1001_1.m3u8?authid=0&key=txiptv&playlive=1
 STV News and General,http://61.173.144.157:9901/tsfile/live/1000_1.m3u8?authid=0&key=txiptv&playlive=1
@@ -101,7 +102,6 @@ Xinjiang TV 5,http://49.113.179.174:4022/udp/238.125.7.149:5140
 Xinjiang TV 8,http://49.113.179.174:4022/udp/238.125.3.181:5140
 Xinjiang TV 9,http://49.113.179.174:4022/udp/238.125.7.153:5140
 Xinjiang TV 12,http://49.113.179.174:4022/udp/238.125.3.185:5140
-Xizang TV Chinese,http://php.jdshipin.com/xztv.php?id=ws
 Xizang TV Tibetan,http://49.113.179.174:4022/udp/238.125.3.94:5140
 Yanbian Cinese Comprehensive Channel,https://live.ybtvyun.com/video/s10016-6d4fe23a90b3/index.m3u8
 Yicai TV,http://49.113.179.174:4022/udp/238.125.0.165:5140
@@ -2319,6 +2319,7 @@ CGTN纪录,http://php.jdshipin.com/TVOD/hljyd.php?id=3221225602
 宁夏卫视,https://hls.ningxiahuangheyun.com/live/nxws1M.m3u8
 宁夏卫视,http://php.jdshipin.com/TVOD/hljyd.php?id=3221225632
 宁夏卫视,http://php.jdshipin.com/TVOD/hnyd.php?id=200000001898/460000089800010110
+西藏卫视,http://php.jdshipin.com/xztv.php?id=ws
 西藏卫视,http://php.jdshipin.com/TVOD/gsyd.php?id=9900000043
 西藏卫视,http://php.jdshipin.com/TVOD/hljyd.php?id=3221225638
 新疆卫视,http://php.jdshipin.com/xjtv.php?id=xjws
@@ -2661,7 +2662,6 @@ CCTV-1 综合,http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV
 CCTV-2 财经,http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226540/index.m3u8
 CCTV-4 中文国际,http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226428/index.m3u8
 CCTV-5 体育,http://[2409:8087:1a01:df::4077]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226019/index.m3u8
-CCTV-5 体育赛事,http://[2409:8087:1a01:df::4077]:80/PLTV/88888888/224/3221225507/index.m3u8
 CCTV-6 电影,http://[2409:8087:1a01:df::4077]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226010/index.m3u8
 CCTV-7 国防军事,http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221225733/index.m3u8
 CCTV-8 电视剧,http://[2409:8087:1a01:df::4077]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226008/index.m3u8
@@ -3021,7 +3021,6 @@ Xinjiang TV 5,http://106.124.91.222:9901/tsfile/live/21216_1.m3u8?authid=0&key=t
 Xinjiang TV 8,http://106.124.91.222:85/tsfile/live/21219_1.m3u8?authid=0&key=txiptv&playlive=1
 Xinjiang TV 8,http://120.70.60.179:9901/tsfile/live/1002_1.m3u8?authid=0&key=txiptv&playlive=1
 Xinjiang TV 9,http://106.124.91.222:85/tsfile/live/21220_1.m3u8?authid=0&key=txiptv&playlive=1
-Xizang TV Tibetan,http://php.jdshipin.com:8880/xztv.php?id=zy
 万州三峡移民,http://123.146.162.24:8013/tslslive/PU2vzMI/hls/live_sd.m3u8
 万州影视,http://123.146.162.24:8013/tslslive/vWlnEzU/hls/live_sd.m3u8
 万州科教,http://123.146.162.24:8013/tslslive/URetCnP/hls/live_sd.m3u8
@@ -3524,5 +3523,5 @@ Nei Monggol TV 2 Mongolian Culture Channel,http://1.24.190.98:10080/hls/40/index
 Nei Monggol TV,http://1.24.190.98:10080/hls/39/index.m3u8
 Nei Monggol TV 2 Mongolian Culture Channel,http://play1-qk.nmtv.cn/live/1686561065304370.m3u8
 Nei Monggol TV,http://play1-qk.nmtv.cn/live/1686560387346365.m3u8
-CCTV-4 Asia,http://trn03.bozztv.com/gin-cctv4/index.m3u8
 Shenzhen Satellite TV,https://livepull-tcms.sztv.com.cn/live/sz4Kpgm.m3u8
+Tonghua TV,http://lsfb.avap.jilintv.cn/zqvk7vpj/channel/43ea5771aa44421591f9dfd2b71f1b9b/index.m3u8
