@@ -31,13 +31,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: results
-          path: results.txt #修改了文件名
+          path: results.txt
+          retention-days: 7   # 7天后自动删除artifact
 
       - name: 提交更改（如果存在）
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "更新播放链接数据"
-          file_pattern: results.txt #修改了文件名
+          file_pattern: results.txt
 
       - name: 强制推送更改
         run: git push origin main --force
