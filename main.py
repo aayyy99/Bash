@@ -40,9 +40,7 @@ def clean_channel_name(channel_name):
 def extract_and_deduplicate_iptv(source_file, results_file):
     """
     从 source_file 中的链接提取 IPTV 播放地址和频道名称，去重后写入 results_file。
-    进一步优化频道名称提取，优先处理 tvg-name 属性。
-    将详细的处理过程日志输出到 processing.log 文件。
-    错误日志仍然输出到 extract_iptv_errors.log 文件和控制台。
+    支持 .m3u 和 .txt 文件，自动识别每个地址的格式。
     """
     try:
         source_file_path = os.path.join(os.path.dirname(__file__), source_file)
@@ -66,44 +64,50 @@ def extract_and_deduplicate_iptv(source_file, results_file):
                 response.raise_for_status()  # 检查 HTTP 请求是否成功
                 content = response.text
                 process_logger.info(f"成功获取链接内容：{source_url}")
-                # 成功获取内容时不输出到控制台
 
-if source_url.endswith('.m3u'):
-    process_logger.info(f"开始解析 M3U 文件：{source_url}")
-    current_channel_name = ""
-    for line in content.splitlines():
-        if line.startswith('#EXTM3U'):
-            continue
-        elif line.startswith('#EXTINF:'):
-            channel_name_match = re.search(r'tvg-name="([^"]*)"', line)
-            if channel_name_match:
-                current_channel_name = channel_name_match.group(1).strip()
-            else:
-                name_match = re.search(r',([\s\S]*?)(?:\s*\(|\s*$)', line)
-                current_channel_name = name_match.group(1).strip() if name_match else "未知频道"
-            current_channel_name = clean_channel_name(current_channel_name) # 清理频道名称
-        elif line.startswith('http'):
-            iptv_data.append((current_channel_name, line.strip()))
-            process_logger.info(f"提取到频道：{current_channel_name}, 地址：{line.strip()}")
-            current_channel_name = ""
-    process_logger.info(f"M3U 文件解析完成：{source_url}")
+                if source_url.endswith('.m3u'):
+                    process_logger.info(f"开始解析 M3U 文件：{source_url}")
+                    current_channel_name = ""
+                    for line in content.splitlines():
+                        if line.startswith('#EXTM3U'):
+                            continue
+                        elif line.startswith('#EXTINF:'):
+                            channel_name_match = re.search(r'tvg-name="([^"]*)"', line)
+                            if channel_name_match:
+                                current_channel_name = channel_name_match.group(1).strip()
+                            else:
+                                name_match = re.search(r',([\s\S]*?)(?:\s*\(|\s*$)', line)
+                                current_channel_name = name_match.group(1).strip() if name_match else "未知频道"
+                            current_channel_name = clean_channel_name(current_channel_name) # 清理频道名称
+                        elif line.startswith('http'):
+                            iptv_data.append((current_channel_name, line.strip()))
+                            process_logger.info(f"提取到频道：{current_channel_name}, 地址：{line.strip()}")
+                            current_channel_name = ""
+                    process_logger.info(f"M3U 文件解析完成：{source_url}")
 
-elif source_url.endswith('.txt'):
-    process_logger.info(f"开始解析 TXT 文件：{source_url}")
-    for line in content.splitlines():
-        line = line.strip()
-        if not line or line.startswith('#'):
-            continue
-        # 支持“频道名,地址”或单独地址
-        if ',' in line:
-            channel, url = line.split(',', 1)
-            channel = clean_channel_name(channel)
-            iptv_data.append((channel, url.strip()))
-            process_logger.info(f"提取到频道：{channel}, 地址：{url.strip()}")
-        elif line.startswith('http'):
-            iptv_data.append(("", line))
-            process_logger.info(f"提取到地址：{line}")
-    process_logger.info(f"TXT 文件解析完成：{source_url}")
+                elif source_url.endswith('.txt'):
+                    process_logger.info(f"开始解析 TXT 文件：{source_url}")
+                    for line in content.splitlines():
+                        line = line.strip()
+                        if not line or line.startswith('#'):
+                            continue
+                        # 支持“频道名,地址”或单独地址
+                        if ',' in line:
+                            channel, url = line.split(',', 1)
+                            channel = clean_channel_name(channel)
+                            iptv_data.append((channel, url.strip()))
+                            process_logger.info(f"提取到频道：{channel}, 地址：{url.strip()}")
+                        elif line.startswith('http'):
+                            iptv_data.append(("", line))
+                            process_logger.info(f"提取到地址：{line}")
+                    process_logger.info(f"TXT 文件解析完成：{source_url}")
+
+            except requests.exceptions.RequestException as e:
+                logging.error(f"下载 {source_url} 时出错：{e}")
+                print(f"下载 {source_url} 时出错：{e}") # 获取失败时输出到控制台
+            except Exception as e:
+                logging.error(f"处理 {source_url} 时发生错误：{e}")
+                print(f"处理 {source_url} 时发生错误：{e}") # 其他处理错误也输出到控制台
 
         # 基于播放地址去重
         unique_iptv_data = {}
