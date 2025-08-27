@@ -1,0 +1,41 @@
+name: 自动清理 Workflow Runs
+
+on:
+  workflow_dispatch:     # 可以手动触发
+  schedule:
+    - cron: '25 22 * * *' # 每天定时执行（UTC时间）
+
+jobs:
+  clean-runs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 GitHub CLI
+        run: sudo apt-get install gh -y
+
+      - name: 登录 GitHub CLI
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh auth login --with-token < <(echo "$GH_TOKEN")
+
+      - name: 删除 workflow 运行历史
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          LIMIT=50
+          while true; do
+            RUN_IDS=$(gh run list --repo "$REPO" --limit $LIMIT --json databaseId --jq '.[].databaseId')
+            if [ -z "$RUN_IDS" ]; then
+              break
+            fi
+            for id in $RUN_IDS; do
+              gh run delete "$id" --repo "$REPO" -y
+              sleep 1
+            done
+            if [ "$(echo "$RUN_IDS" | wc -l)" -lt "$LIMIT" ]; then
+              break
+            fi
+          done
