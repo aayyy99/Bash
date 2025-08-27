@@ -36,16 +36,22 @@ jobs:
           echo "当前可见的 workflow run："
           gh run list --repo "$REPO" --limit $LIMIT --json databaseId,status,headBranch,event,name --jq '.[] | "\(.databaseId) \(.status) \(.headBranch) \(.event) \(.name)"'
           while true; do
-            RUN_IDS=$(gh run list --repo "$REPO" --limit $LIMIT --json databaseId --jq '.[].databaseId')
-            if [ -z "$RUN_IDS" ]; then
+            RUN_INFOS=$(gh run list --repo "$REPO" --limit $LIMIT --json databaseId,status --jq '.[] | "\(.databaseId) \(.status)"')
+            if [ -z "$RUN_INFOS" ]; then
               break
             fi
-            for id in $RUN_IDS; do
-              echo "准备删除 run id: $id"
+            while read -r id status; do
+              if [ "$status" = "in_progress" ]; then
+                echo "跳过正在运行的 run id: $id"
+                continue
+              fi
+              echo "准备删除 run id: $id, 状态: $status"
               yes | gh run delete "$id" --repo "$REPO"
               sleep 1
-            done
-            if [ "$(echo "$RUN_IDS" | wc -l)" -lt "$LIMIT" ]; then
+            done <<< "$(echo "$RUN_INFOS")"
+            # 判断是否已处理完
+            RUN_COUNT=$(echo "$RUN_INFOS" | wc -l)
+            if [ "$RUN_COUNT" -lt "$LIMIT" ]; then
               break
             fi
           done
