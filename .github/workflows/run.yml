@@ -30,14 +30,21 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
+          export GH_TOKEN=${GH_TOKEN}
           LIMIT=50
           REPO=${{ github.repository }}
+
+          # 输出 workflow run 详细信息（插入在这里）
+          echo "当前可见的 workflow run："
+          gh run list --repo "$REPO" --limit $LIMIT --json databaseId,status,headBranch,event,actor --jq '.[] | "\(.databaseId) \(.status) \(.headBranch) \(.event) \(.actor.login)"'
+
           while true; do
             RUN_IDS=$(gh run list --repo "$REPO" --limit $LIMIT --json databaseId --jq '.[].databaseId')
             if [ -z "$RUN_IDS" ]; then
               break
             fi
             for id in $RUN_IDS; do
+              echo "准备删除 run id: $id"
               yes | gh run delete "$id" --repo "$REPO"
               sleep 1
             done
