@@ -16,11 +16,6 @@ jobs:
       - name: 安装 GitHub CLI
         run: sudo apt-get install gh -y
 
-      - name: 登录 GitHub CLI
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh auth login --with-token < <(echo "$GH_TOKEN")
-
       - name: 删除 workflow 运行历史
         env:
           REPO: ${{ github.repository }}
