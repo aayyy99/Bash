@@ -28,7 +28,7 @@ jobs:
 
       - name: 删除 workflow 运行历史
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           LIMIT=50
           REPO=${{ github.repository }}
