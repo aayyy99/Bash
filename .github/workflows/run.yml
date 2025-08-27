@@ -33,11 +33,8 @@ jobs:
           export GH_TOKEN=${GH_TOKEN}
           LIMIT=50
           REPO=${{ github.repository }}
-
-          # 输出 workflow run 详细信息（插入在这里）
           echo "当前可见的 workflow run："
-          gh run list --repo "$REPO" --limit $LIMIT --json databaseId,status,headBranch,event,actor --jq '.[] | "\(.databaseId) \(.status) \(.headBranch) \(.event) \(.actor.login)"'
-
+          gh run list --repo "$REPO" --limit $LIMIT --json databaseId,status,headBranch,event,name --jq '.[] | "\(.databaseId) \(.status) \(.headBranch) \(.event) \(.name)"'
           while true; do
             RUN_IDS=$(gh run list --repo "$REPO" --limit $LIMIT --json databaseId --jq '.[].databaseId')
             if [ -z "$RUN_IDS" ]; then
