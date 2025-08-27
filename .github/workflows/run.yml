@@ -18,9 +18,10 @@ jobs:
 
       - name: 删除 workflow 运行历史
         env:
-          REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           LIMIT=50
+          REPO=${{ github.repository }}
           while true; do
             RUN_IDS=$(gh run list --repo "$REPO" --limit $LIMIT --json databaseId --jq '.[].databaseId')
             if [ -z "$RUN_IDS" ]; then
