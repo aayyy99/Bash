@@ -1,7 +1,7 @@
 name: 自动清理 Workflow Runs
 
 on:
-  workflow_dispatch:     # 可以手动触发
+  workflow_dispatch:
   schedule:
     - cron: '25 22 * * *' # 每天定时执行（UTC时间）
 
@@ -13,8 +13,14 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 安装 GitHub CLI
-        run: sudo apt-get install gh -y
+      - name: 安装最新版 GitHub CLI
+        run: |
+          type -p curl >/dev/null || sudo apt install curl -y
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt update
+          sudo apt install gh -y
 
       - name: 删除 workflow 运行历史
         env:
