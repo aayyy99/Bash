@@ -32,7 +32,6 @@ jobs:
         with:
           name: results
           path: results.txt
-          retention-days: 7   # 7天后自动删除artifact
 
       - name: 提交更改（如果存在）
         uses: stefanzweifel/git-auto-commit-action@v4
